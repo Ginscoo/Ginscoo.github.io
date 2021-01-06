@@ -1,11 +1,11 @@
-<div class="cover-main"><img width="180px" src="icon/icon.JPG">
+<div class="cover-main"><img width="180px" src="icon/hello.JPG">
 
 <h1 id="toBeTopJavaer">
 <a><span>Ginscoo  -  茶啡更好喝</span></a></h1>
 
 
 
-![](https://img.shields.io/badge/version-v2.0.0-green.svg) ![](https://img.shields.io/badge/author-Hollis-yellow.svg) ![](https://img.shields.io/badge/license-GPL-blue.svg)
+![](https://img.shields.io/badge/version-v2.0.0-green.svg) ![](https://img.shields.io/badge/author-Ginscoo-orange) ![](https://img.shields.io/badge/license-GPL-blue.svg)
 
 
 <span id="busuanzi_container_site_pv" style="display: inline;">
