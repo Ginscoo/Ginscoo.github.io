@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="GBK"?>
+<ViewPack>
+    <View code="SystemStatus_View" version="1.00" id="" description="系统状态视图">
+        <Hardware>
+            <Boards>
+                <Board name="System" status="normal" reason="CPU温度过高">
+                    <Interfaces>
+                        <Interface name="内网口1" status="connected" ip="192.168.2.254" mask="255.255.255.
+255" gateway="192.168.2.1" mac="40-61-86-60-B1-DB" speed="1000" bandwidth="0" admin="yes"/>
+                        <Interface name="内网口2" status="connected" ip="192.168.1.254" mask="255.255.255.
+255" gateway="192.168.1.1" mac="00-50-56-C0-00-08" speed="10000" bandwidth="10" admin="no"/>
+                    </Interfaces>
+                    <CpuUsage>0</CpuUsage>
+                    <MemUsage>665600/4194304</MemUsage>
+                    <SysDiskUsage>30166/491520</SysDiskUsage>
+                    <LogDiskUsage>30166/491520</LogDiskUsage>
+                </Board>
+                <Board name="EXTRA" status="normal" reason="">
+                    <Interfaces>
+                        <Interface name="内网口1" status="connected" ip="192.168.2.254" mask="255.255.255.
+255" gateway="192.168.2.1" mac="40-61-86-60-B1-DB" speed="1000" bandwidth="0" admin="yes"/>
+                        <Interface name="内网口2" status="connected" ip="192.168.1.254" mask="255.255.255.
+255" gateway="192.168.1.1" mac="00-50-56-C0-00-08" speed="10000" bandwidth="10" admin="no"/>
+                    </Interfaces>
+                    <CpuUsage>0</CpuUsage>
+                    <MemUsage>665600/4194304</MemUsage>
+                    <DiskUsage>30166/491520</DiskUsage>
+                </Board>
+                <Board name="CONTROL" status="normal" reason="">
+                    <Interfaces>27
+                        <Interface name="内网口2" status="connected" ip="192.168.1.254" mask="255.255.255.
+255" gateway="192.168.1.1" mac="00-50-56-C0-00-08" speed="10000" bandwidth="10" admin="no"/>
+                    </Interfaces>
+                    <CpuUsage>30</CpuUsage>
+                    <MemUsage>665600/4194304</MemUsage>
+                    <DiskUsage>30166/491520</DiskUsage>
+                </Board>
+            </Boards>
+        </Hardware>
+        <Software isMaster="yes" masterIP="18.1.1.35">
+            <Versions>
+                <Version description="系统版本">1.0.0.0</Version>
+                <Version description="规则库版本">1.0.0.0</Version>
+            </Versions>
+            <CurrentUserName>admin</CurrentUserName>
+            <CpuUsage>30</CpuUsage>
+            <MemUsage>665600</MemUsage>
+            <DiskUsage>30166</DiskUsage>
+            <Modules>
+                <Module name="网络访问控制服务" status="normal" reason="正常运行"/>
+            </Modules>
+        </Software>
+    </View>
+</ViewPack>
+
+
+<?xml version="1.0" encoding="GBK"?>
+<ConfigPack>
+    <Config code="Report_Config" version="1.00" mode="transient" id="" description="数据上报配置">
+        <Views>
+            <View code="SystemStatus_View" version="1.00" id="1" description="系统状态视图" reporttype="loop">10</View>
+            <View code="SystemInfo_View" version="1.00" id="1" description="系统信息视图" reporttype="instant"></View>
+        </Views>
+        <Events>
+            <Event code="Defence_Event" version="1.00" id="1" description="攻击事件" reporttype="loop" reportlevel="info|low|middle|high">30</Event>
+            <Event code="UserAuthFail_Event" version="1.00" id="1" description="用户认证失败事件" reporttype="loop" reportlevel="info|low|middle|high">30</Event>
+        </Events>
+        <Logs>
+            <Log code="Operation_Log" version="1.00" id="1" description="管理员操作日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+            <Log code="Error_Log" version="1.00" id="1" description="故障日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+            <Log code="Update_Log" version="1.00" id="1" description="系统升级日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+        </Logs>
+        <Policys>
+            <Policy code="ResourceInfo_Policy" version="1.00" id="1" description="资源信息配置策略" reporttype="instant"></Policy>
+            <Policy code="WebDefence_Policy" version="1.00" id="1" description="WEB防护策略" reporttype="instant"></Policy>
+            <Policy code="ResourceToDefence_Policy" version="1.00" id="1" description="资源/Web防护绑定策略" reporttype="instant"></Policy>
+        </Policys>
+
+
+
+        <?xml version="1.0" encoding="GBK"?>
+        <ConfigPack>
+            <Config code="Report_Config" version="1.00" mode="transient" id="" description="数据上报配置">
+                <Views>
+                    <View code="SystemStatus_View" version="1.00" id="1" description="系统状态视图" reporttype="loop">60</View>
+                    <View code="SystemInfo_View" version="1.00" id="1" description="系统信息视图" reporttype="instant"></View>
+                </Views>
+                <Events>
+                    <Event code="FireWall_Event" version="1.00" id="1" description="防火墙告警" reporttype="loop" reportlevel="info|low|middle|high">20</Event>
+                </Events>
+                <Logs>
+                    <Log code="Operation_Log" version="1.00" id="1" description="管理员操作日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                    <Log code="Error_Log" version="1.00" id="1" description="故障日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                    <Log code="Update_Log" version="1.00" id="1" description="系统升级日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                    <Log code="FireWall_Log" version="1.00" id="1" description="防火墙日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                </Logs>
+                <Policys>
+                    <Policy code="AddressObject_Policy" version="1.00" id="1" description="地址对象配置策略" reporttype="instant"></Policy>
+                    <Policy code="AddressObjectGroup_Policy" version="1.00" id="1" description="地址对象组配置策略" reporttype="instant"></Policy>
+                    <Policy code="ServiceObject_Policy" version="1.00" id="1" description="服务对象配置策略" reporttype="instant"></Policy>
+                    <Policy code="ServiceObjectGroup_Policy" version="1.00" id="1" description="服务对象组配置策略" reporttype="instant"></Policy>
+                    <Policy code="IpAcl_Policy" version="1.00" id="1" description="访问控制策略" reporttype="instant"></Policy>
+                </Policys>
+            </Config>
+        </ConfigPack>
+
+
+?xml version="1.0" encoding="GBK"?><ConfigPack>
+        <Config code="Report_Config" version="1.00" mode="transient" id="" description="数据上报配置">
+            <Views>
+                <View code="SystemStatus_View" version="1.00" id="1" description="系统状态视图" reporttype="loop">10</View>
+                <View code="SystemInfo_View" version="1.00" id="1" description="系统信息视图" reporttype="instant"></View>
+            </Views>
+            <Events>
+                <Event code="Defence_Event" version="1.00" id="1" description="攻击事件" reporttype="loop" reportlevel="info|low|middle|high">30</Event>
+                <Event code="UserAuthFail_Event" version="1.00" id="1" description="用户认证失败事件" reporttype="loop" reportlevel="info|low|middle|high">30</Event>
+            </Events>
+            <Logs>
+                <Log code="Operation_Log" version="1.00" id="1" description="管理员操作日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                <Log code="Error_Log" version="1.00" id="1" description="故障日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                <Log code="Update_Log" version="1.00" id="1" description="系统升级日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+            </Logs>
+            <Policys>
+                <Policy code="ResourceInfo_Policy" version="1.00" id="1" description="资源信息配置策略" reporttype="instant"></Policy>
+                <Policy code="WebDefence_Policy" version="1.00" id="1" description="WEB防护策略" reporttype="instant"></Policy>
+                <Policy code="ResourceToDefence_Policy" version="1.00" id="1" description="资源/Web防护绑定策略" reporttype="instant"></Policy>
+            </Policys>
+
+
+            <?xml version="1.0" encoding="GBK"?>
+            <ConfigPack>
+                <Config code="Report_Config" version="1.00" mode="transient" id="" description="数据上报配置">
+                    <Views>
+                        <View code="SystemStatus_View" version="1.00" id="1" description="系统状态视图" reporttype="loop">60</View>
+                        <View code="SystemInfo_View" version="1.00" id="1" description="系统信息视图" reporttype="instant"></View>
+                    </Views>
+                    <Events>
+                        <Event code="FireWall_Event" version="1.00" id="1" description="防火墙告警" reporttype="loop" reportlevel="info|low|middle|high">20</Event>
+                    </Events>
+                    <Logs>
+                        <Log code="Operation_Log" version="1.00" id="1" description="管理员操作日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                        <Log code="Error_Log" version="1.00" id="1" description="故障日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                        <Log code="Update_Log" version="1.00" id="1" description="系统升级日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                        <Log code="FireWall_Log" version="1.00" id="1" description="防火墙日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                    </Logs>
+                    <Policys>
+                        <Policy code="AddressObject_Policy" version="1.00" id="1" description="地址对象配置策略" reporttype="instant"></Policy>
+                        <Policy code="AddressObjectGroup_Policy" version="1.00" id="1" description="地址对象组配置策略" reporttype="instant"></Policy>
+                        <Policy code="ServiceObject_Policy" version="1.00" id="1" description="服务对象配置策略" reporttype="instant"></Policy>
+                        <Policy code="ServiceObjectGroup_Policy" version="1.00" id="1" description="服务对象组配置策略" reporttype="instant"></Policy>
+                        <Policy code="IpAcl_Policy" version="1.00" id="1" description="访问控制策略" reporttype="instant"></Policy>
+                    </Policys>
+                </Config>
+            </ConfigPack>
+
+
+            <?xml version="1.0" encoding="GBK"?>
+            <ConfigPack>
+                <Config code="Report_Config" version="1.00" mode="transient" id="" description="数据上报配置">
+                    <Views>
+                        <View code="SystemStatus_View" version="1.00" id="1" description="系统状态视图" reporttype="loop">10</View>
+                        <View code="SystemInfo_View" version="1.00" id="1" description="系统信息视图" reporttype="instant"></View>
+                    </Views>
+                    <Events>
+                        <Event code="Defence_Event" version="1.00" id="1" description="攻击事件" reporttype="loop" reportlevel="info|low|middle|high">30</Event>
+                        <Event code="UserAuthFail_Event" version="1.00" id="1" description="用户认证失败事件" reporttype="loop" reportlevel="info|low|middle|high">30</Event>
+                    </Events>
+                    <Logs>
+                        <Log code="Operation_Log" version="1.00" id="1" description="管理员操作日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                        <Log code="Error_Log" version="1.00" id="1" description="故障日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                        <Log code="Update_Log" version="1.00" id="1" description="系统升级日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                    </Logs>
+                    <Policys>
+                        <Policy code="ResourceInfo_Policy" version="1.00" id="1" description="资源信息配置策略" reporttype="instant"></Policy>
+                        <Policy code="WebDefence_Policy" version="1.00" id="1" description="WEB防护策略" reporttype="instant"></Policy>
+                        <Policy code="ResourceToDefence_Policy" version="1.00" id="1" description="资源/Web防护绑定策略" reporttype="instant"></Policy>
+                    </Policys>
+
+                    <?xml version="1.0" encoding="GBK"?>
+                    <ConfigPack>
+                        <Config code="Report_Config" version="1.00" mode="transient" id="" description="数据上报配置">
+                            <Views>
+                                <View code="SystemStatus_View" version="1.00" id="1" description="系统状态视图" reporttype="loop">10</View>
+                                <View code="SystemInfo_View" version="1.00" id="1" description="系统信息视图" reporttype="instant"></View>
+                            </Views>
+                            <Events>
+                                <Event code="Defence_Event" version="1.00" id="1" description="攻击事件" reporttype="loop" reportlevel="info|low|middle|high">30</Event>
+                                <Event code="UserAuthFail_Event" version="1.00" id="1" description="用户认证失败事件" reporttype="loop" reportlevel="info|low|middle|high">30</Event>
+                            </Events>
+                            <Logs>
+                                <Log code="Operation_Log" version="1.00" id="1" description="管理员操作日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                                <Log code="Error_Log" version="1.00" id="1" description="故障日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                                <Log code="Update_Log" version="1.00" id="1" description="系统升级日志" reporttype="loop" reportlevel="info|low|middle|high">30</Log>
+                            </Logs>
+                            <Policys>
+                                <Policy code="ResourceInfo_Policy" version="1.00" id="1" description="资源信息配置策略" reporttype="instant"></Policy>
+                                <Policy code="WebDefence_Policy" version="1.00" id="1" description="WEB防护策略" reporttype="instant"></Policy>
+                                <Policy code="ResourceToDefence_Policy" version="1.00" id="1" description="资源/Web防护绑定策略" reporttype="instant"></Policy>
+                            </Policys>
+                        </Config>
+                    </ConfigPack> 

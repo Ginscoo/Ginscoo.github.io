@@ -7,7 +7,9 @@
     * [ss](/out/shadowsocks.md)
 * Cert
     * [X509](/cert/x509.md)
-* Middleware
-    * [Redis](/middleware/Redis.md)
-* Linux
-    * [CentOS7](/linux/CentOS7.md)
+* DataBase
+    * [Redis](/db/Redis.md)
+    * [MySQL](/db/MySQL.md)
+* OS
+    * [CentOS7](/OS/CentOS7.md)
+    * [macOS](/OS/macOS.md)

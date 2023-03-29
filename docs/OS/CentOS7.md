@@ -75,3 +75,15 @@
     yum install git -y
     yum install telnet -y
     yum install wget -y
+
+## 错误处理
+### Entering emergency mode. Exit the shell to continue
+输入以下命令
+
+    # 此命令的作用是强制清除日志，不会删除自己的文件
+    xfs_repair -v -L /dev/dm-0
+
+重启服务器
+
+    reboot
+
