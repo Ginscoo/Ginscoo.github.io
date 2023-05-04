@@ -8,6 +8,7 @@
         * [Puppeteer](/node/puppeteer.md)
 * Out
     * [ss](/out/shadowsocks.md)
+    * [OpenAI注册](/out/openAI.md)
 * 网络知识
     * Cert
         * [X509](/cert/x509.md)
