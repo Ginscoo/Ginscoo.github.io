@@ -6,7 +6,7 @@
 
 # CAS （Compare And Swap）- 比较和交换
 * 在多线程下，数字的自增可能是非原子的（可能在自增时，值被其他线程修改）
-* Java中可用关键字`sychronized`， 单效果比较低，一般通过`Atomic*` 类实现，如 `AtomicInteger` or `AtomicLong`
+* Java中可用关键字`sychronized`， 但效率比较低，一般通过`Atomic*` 类实现，如 `AtomicInteger` or `AtomicLong`
 * `Atomic*`，底层即为CAS实现
 
 ## AtomicInteger.incrementAndGet()
