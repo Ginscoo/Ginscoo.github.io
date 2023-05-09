@@ -20,5 +20,7 @@
 * 系统
     * [CentOS7](/OS/CentOS7.md)
     * [macOS](/OS/macOS.md)
+* 人工智能
+    * [安装并使用百度飞浆进行视频人像识别示例 - paddlepaddle](/ai/paddlepaddle.md)
 * 工具使用
     * [IntelliJ IDEA](/ide/IntelliJ-IDEA.md)
