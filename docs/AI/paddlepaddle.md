@@ -1,13 +1,17 @@
 ## 0.1. 准备
-### 0.1.1. 安环境
-    * `windows11`
-    * `python3.10`
-    * `RTX4090`
+
+### 0.1.1. 安装环境
+* `windows11`
+* `python3.10`
+* `RTX4090`
+
 ### 0.1.2. 帮助文档
-    * github [https://github.com/PaddlePaddle/Paddle](https://github.com/PaddlePaddle/Paddle)
-    * 模型中心 [https://www.paddlepaddle.org.cn/en/models](https://www.paddlepaddle.org.cn/en/models)
-    * GPU版本选择 [https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html)
+* github [https://github.com/PaddlePaddle/Paddle](https://github.com/PaddlePaddle/Paddle)
+* 模型中心 [https://www.paddlepaddle.org.cn/en/models](https://www.paddlepaddle.org.cn/en/models)
+* GPU版本选择 [https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html)
+
 ## 0.2. 安装
+
 ### 0.2.1. 安装`paddlepaddle`
 ```Shell
 # 分为CPU与GPU版本，允许的话建议使用GPU加速
@@ -19,40 +23,42 @@ pip install paddlepaddle
 # pip install paddlepaddle-gpu==2.4.2.post117 -f https://www.paddlepaddle.org.cn/whl/windows/mkl/avx/stable.html
 pip install paddlepaddle-gpu
 ```
+
 ### 0.2.2. 安装`paddlehub`
 ```Shell
 # 模型管理中心
 pip install paddlehub 
 ```
+
 ### 0.2.3. 安装GPU相关库
 * 安装GPU相关库
-    * 相关版本安装可参考 - [https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html)
-    * 安装CUDA
-        * 可能需要登录
-        * 下载地址 - [https://developer.nvidia.cn/cuda-downloads?target_os=Windows&target_arch=x86_64](https://developer.nvidia.cn/cuda-downloads?target_os=Windows&target_arch=x86_64)
-        * 历史版本下载 - [https://developer.nvidia.cn/cuda-toolkit-archive](https://developer.nvidia.cn/cuda-toolkit-archive)
-        * 这里选择11.7
-        * 安装完重启下
-        * 安装位置一般在 `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7`
-    * 下载cuDNN
-        * [https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)
-        * 解压一般包含如下几个文件
-            * `bin`
-            * `include`
-            * `lib`
-        * 直接复制到`CUDA`目录下`C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7`,存在的直接覆盖即可
-    * 下载 `Zlib`
-        * 部分场景需要解压缩，需要安装` Installing Zlib`
-        * 缺少报错`Could not locate zlibwapi.dll. Please make sure it is in your library path`
-        * 参考文档 - [https://www.liaojinhua.com/python/3820.html](https://www.liaojinhua.com/python/3820.html)
-        * 下载地址 - [https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-zlib-windows](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-zlib-windows)
-        * 下载完成后解压将`zlibwapi.dll`复制到`C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7\bin`即可
+* 相关版本安装可参考 - [https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/install/pip/windows-pip.html)
+* 安装CUDA
+    * 可能需要登录
+    * 下载地址 - [https://developer.nvidia.cn/cuda-downloads?target_os=Windows&target_arch=x86_64](https://developer.nvidia.cn/cuda-downloads?target_os=Windows&target_arch=x86_64)
+    * 历史版本下载 - [https://developer.nvidia.cn/cuda-toolkit-archive](https://developer.nvidia.cn/cuda-toolkit-archive)
+    * 这里选择11.7
+    * 安装完重启下
+    * 安装位置一般在 `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7`
+* 下载cuDNN
+    * [https://developer.nvidia.com/rdp/cudnn-archive](https://developer.nvidia.com/rdp/cudnn-archive)
+    * 解压一般包含如下几个文件
+        * `bin`
+        * `include`
+        * `lib`
+    * 直接复制到`CUDA`目录下`C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7`,存在的直接覆盖即可
+* 下载 `Zlib`
+    * 部分场景需要解压缩，需要安装` Installing Zlib`
+    * 缺少报错`Could not locate zlibwapi.dll. Please make sure it is in your library path`
+    * 参考文档 - [https://www.liaojinhua.com/python/3820.html](https://www.liaojinhua.com/python/3820.html)
+    * 下载地址 - [https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-zlib-windows](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html#install-zlib-windows)
+    * 下载完成后解压将`zlibwapi.dll`复制到`C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7\bin`即可
 * 检查GPU配置情况
 ```python
 import paddlepaddle.utils.run_check()
 paddle.utils.run_check()
 ```
-如果出现如下表示成功
+结果如下表示成功
 ```Console
 Running verify PaddlePaddle program ... 
 W0509 14:46:12.973776 32952 gpu_resources.cc:61] Please NOTE: device: 0, GPU Compute Capability: 8.9, Driver API Version: 12.1, Runtime API Version: 11.7
