@@ -6,6 +6,8 @@
         * [批量插入 - SpringDataJPA](/java/spring-data-jpa-batch-insert.md)
         * CWE
             * [http安全 - Options* ](/java/cwe/Options.md)
+        * Spring
+            * [配置加密](/spring/PropertiesCrypto.md)
     * NodeJS
         * [Puppeteer](/node/puppeteer.md)
 * Out
