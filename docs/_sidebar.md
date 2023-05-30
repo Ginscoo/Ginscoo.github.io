@@ -4,10 +4,13 @@
         * [执行器 - Exector](/java/Executor.md)
         * [注解处理调试 - AptDebug](/java/AptDebug.md)
         * [批量插入 - SpringDataJPA](/java/spring-data-jpa-batch-insert.md)
+        * [范型 - Generic Type](/java/范型-GenericType.md)
         * CWE
             * [http安全 - Options* ](/java/cwe/Options.md)
         * Spring
             * [配置加密](/spring/PropertiesCrypto.md)
+            * [spring-boot启动](/spring/可执行jar包)
+            * [可执行jar包](/spring/可执行jar包.md)
     * NodeJS
         * [Puppeteer](/node/puppeteer.md)
 * Out
