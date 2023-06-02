@@ -11,7 +11,8 @@
             * [配置加密](/spring/PropertiesCrypto.md)
             * [spring-boot启动](/spring/可执行jar包)
             * [可执行jar包](/spring/可执行jar包.md)
-            * [SpringBootWeb开发之敏感数据处理（一）-JPA实现数据库敏感字段透明加解密.md](WEB开发敏感数据处理-JPA实现数据库敏感字段透明加解密.md)
+            * [SpringBootWeb开发之敏感数据处理（一）-JPA实现数据库敏感字段透明加解密.md](/java/WEB开发敏感数据处理-JPA实现数据库敏感字段透明加解密.md)
+            * [跨域](/java/跨域.md)
     * NodeJS
         * [Puppeteer](/node/puppeteer.md)
 * Out
