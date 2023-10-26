@@ -28,12 +28,8 @@ while cap_video.isOpened():
     if ret:
         [img_matting, prev_gray, prev_cfd] = human_seg.video_stream_segment(frame_org=frame_org, frame_id=cap_video.get(1), prev_gray=prev_gray, prev_cfd=prev_cfd, use_gpu=True)
         img_matting = np.repeat(img_matting[:, :, np.newaxis], 3, axis=2)
-        # bg_im = np.zeros((height, width, 4), dtype=np.uint8)  # 创建一个四通道图像，第四个通道为 alpha 通道
-        # bg_im[:, :, 3] = 0  # 将 alpha 通道设置为全 0，表示完全透明
-
         bg_im = np.ones_like(img_matting) * 0
-        # bg_im[:, :, 1] = 255       # get green canva
-        bg_im[:, :, 1] = 88       # get green canva
+        bg_im[:, :, 1] = 255       # get green canva
         comb = (img_matting * frame_org + (1 - img_matting) * bg_im).astype(np.uint8)
         cap_out.write(comb)
 

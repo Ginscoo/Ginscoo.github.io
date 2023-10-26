@@ -24,6 +24,7 @@ public class AopConfiguration {
     }
 }
 ```
+### 针对所有资源的流量控制规则：
 
 ```Java
 FlowRule rule = new FlowRule();
@@ -32,6 +33,8 @@ rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
 rule.setCount(100);
 FlowRuleManager.loadRules(Collections.singletonList(rule));
 ```
+
+### 针对所有资源的熔断降级规则：
 
 ```Java
 DegradeRule rule = new DegradeRule();
