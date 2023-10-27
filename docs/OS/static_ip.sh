@@ -1,7 +1,9 @@
-NETCART_NAME=`ip -o link show | awk 'NR>1 && $2 ~ /^ens/ {sub(/:/, "", $2); print $2}'`
+#!/bin/bash
+
+NETCART_NAME=$(ip -o link show | awk 'NR>1 && $2 ~ /^ens/ {sub(/:/, "", $2); print $2}')
 echo $NETCART_NAME
-UUID=`cat /etc/sysconfig/network-scripts/ifcfg-$NETCART_NAME | grep UUID | grep -v grep`
-GATEWAY=`echo "$1" | sed 's/\(\([0-9]\{1,3\}\.\)\{3\}\)[0-9]\{1,3\}/\11/g'`
+UUID=$(cat /etc/sysconfig/network-scripts/ifcfg-$NETCART_NAME | grep UUID | grep -v grep)
+GATEWAY=$(echo "$1" | sed 's/\(\([0-9]\{1,3\}\.\)\{3\}\)[0-9]\{1,3\}/\11/g')
 echo "
 TYPE="Ethernet"
 PROXY_METHOD="none"
