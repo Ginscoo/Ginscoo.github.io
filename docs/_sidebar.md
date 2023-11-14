@@ -5,6 +5,7 @@
         * [注解处理调试 - AptDebug](/java/AptDebug.md)
         * [批量插入 - SpringDataJPA](/java/spring-data-jpa-batch-insert.md)
         * [范型 - Generic Type](/java/范型-GenericType.md)
+        * [Java8](/java/java8.md)
         * CWE
             * [http安全 - Options* ](/java/cwe/Options.md)
         * Spring

@@ -71,3 +71,71 @@ Cglib代理存在如下限制
 #### 0.0.4.4. 解决方案
 * 如果要解析参数一定要在`CharacterEncodingFilter`之后执行防止乱码
 * 将自定义过滤器优先级降低，保障后执行
+
+### 0.0.5. hibernate执行报错：SQL Error: 1785, SQLState: HY000 
+#### 0.0.5.1. 问题
+某线上环境通过API下发脱敏策略，添加脱敏规则时，添加脱敏规则失败,日志如下
+
+```LOG
+2023-11-07 16:11:28.893 [pool-133-thread-1] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 1785, SQLState: HY000 
+2023-11-07 16:11:28.893 [pool-133-thread-1] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Statement violates GTID consistency: Updates to non-transactional tables can only be done in either autocommitted statements or single-statement transactions, and never in the same statement as updates to transactional tables. 
+2023-11-07 16:11:28.893 [pool-133-thread-1] INFO  cn.secsmart.admin.config.aspect.policy.SyncPolicyAfterTransactionAspect - execution(void cn.secsmart.admin.rule.service.impl.RuleServiceImpl.apiAddMaskRule(MaskRuleDTO)) 
+2023-11-07 16:11:28.894 [pool-133-thread-1] ERROR org.hibernate.AssertionFailure - HHH000099: an assertion failure occurred (this may indicate a bug in Hibernate, but is more likely due to unsafe use of the session): org.hibernate.AssertionFailure: null id in cn.secsmart.admin.resource.entity.DbConfigJson entry (don't flush the Session after an exception occurs) 
+2023-11-07 16:11:28.895 [pool-133-thread-1] INFO  cn.secsmart.admin.config.aspect.policy.SyncPolicyAfterTransactionAspect - execution(void cn.secsmart.admin.rule.service.impl.RuleServiceImpl.apiAddMaskRule(MaskRuleDTO)) 
+2023-11-07 16:11:28.895 [pool-133-thread-1] ERROR org.hibernate.AssertionFailure - HHH000099: an assertion failure occurred (this may indicate a bug in Hibernate, but is more likely due to unsafe use of the session): org.hibernate.AssertionFailure: null id in cn.secsmart.admin.resource.entity.DbConfigJson entry (don't flush the Session after an exception occurs) 
+2023-11-07 16:11:28.895 [pool-133-thread-1] INFO  cn.secsmart.admin.config.aspect.policy.SyncPolicyAfterTransactionAspect - execution(void cn.secsmart.admin.rule.service.impl.RuleServiceImpl.apiAddMaskRule(MaskRuleDTO)) 
+```
+
+#### 0.0.5.2. 问题排查
+开始注意力在
+```LOG 
+ERROR org.hibernate.AssertionFailure - HHH000099: an assertion failure occurred (this may indicate a bug in Hibernate, but is more likely due to unsafe use of the session): org.hibernate.AssertionFailure: null id in cn.secsmart.admin.resource.entity.DbConfigJson entry (don't flush the Session after an exception occurs) 
+2023-11-07 16:11:28.895 [pool-133-thread-1] INFO  cn.secsmart.admin.config.aspect.policy.SyncPolicyAfterTransactionAspect - execution(void cn.secsmart.admin.rule.service.impl.RuleServiceImpl.apiAddMaskRule(MaskRuleDTO)) 
+```
+该日志重复打印了几千遍。一通google后无果。
+排查代码也都正常，不明白为何ID为空。
+后来注意到
+```LOG
+2023-11-07 16:11:28.893 [pool-133-thread-1] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 1785, SQLState: HY000 
+2023-11-07 16:11:28.893 [pool-133-thread-1] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Statement violates GTID consistency: Updates to non-transactional tables can only be done in either autocommitted statements or single-statement transactions, and never in the same statement as updates to transactional tables. 
+```
+看到有个解释，基本只有在事务中操作同时操作InnoDB表和MyiSAM表是会出现这种情况。
+
+仔细查看：` Updates to non-transactional tables can only be done in either autocommitted statements or single-statement transactions, and never in the same statement as updates to transactional tables. `  
+
+翻译就是：`不能在同一个更新语句中更新非事务表和事务表`，因为MyiSAM 不支持事务。
+
+遂查看表结构果然发现有一些表是InnoDB,一些表是MyiSAM
+
+#### 0.0.5.3. 问题原因
+mysql库中InnoDB和MyiSAM混用，在同一个事务或者语句中同时进行更InnoDB表和MyiSAM表导致
+参考[https://dadabik.com/forum/index.php?threads/error-1785-statement-violates-gtid-consistency.22541/](https://dadabik.com/forum/index.php?threads/error-1785-statement-violates-gtid-consistency.22541/)
+
+#### 0.0.5.4. 解决方案
+将所有表都改为InnoDB，正常业务开发都应该使用InnoDB，MyiSAM不推荐使用
+
+### 0.0.6. OJDBC oracle获取连接超时或者缓慢
+
+#### 0.0.6.1. 解决方案
+*  查看`/dev/random`文件是否随机数不足
+    * 执行`head -n 1 /dev/random`如果一直阻塞，可能是随机数不足，可增加启动参数 `-Djava.security.egd=/dev/urandom`
+* 查看 `/ect/reslov.conf`配置的DNS是否有效
+    * 如果有配置DNS 执行`nslookup -port=53 127.0.0.1 $DNS_IP`,如果很慢或者不通，删除无效的DNS
+
+### 0.0.7. 每次请求JSESSIONID都会变化
+
+#### 0.0.7.1. 问题
+每次请求时,请求头 Cookie: JSESSIONID=AAA
+每次响应时，响应头 Set-Cookie: JSESSIONID=BBB
+导致每次请求都会用一个新的session
+
+#### 0.0.7.2. 问题原因
+配置了`server.servlet.session.cookie.name=SESSIONID`，由于`JSESSIONID`与`SESSIONID`不匹配
+服务端不认为是一个有效的`SESSION `会重新生成一个`SESSIONID`
+
+#### 0.0.7.3. 解决方案
+不配置 `server.servlet.session.cookie.name=SESSIONID`，默认会使用`JSESSIONID`
+
+#### 0.0.7.4. 疑问 
+为什么返回的 Set-Cookie里还是`JSESSIONID` 呢
+
