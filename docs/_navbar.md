@@ -1,4 +1,6 @@
+* [java](/java/)
 * [编程](/menu)
-* [系统](/OS/)              
+* [系统](/OS/)   
+* [常用命令](/command/)           
 * [常用工具](/netools/) 
 * [linux](/OS/)
