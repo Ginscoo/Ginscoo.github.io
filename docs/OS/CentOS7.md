@@ -87,3 +87,18 @@
 
     reboot
 
+
+## SSH 免密
+本质就是
+ssh-keygen
+ssh-copy-id
+ssh-add
+
+```
+# 生成公私钥
+# ssh-keygen -t rsa -b 2048 -f ./auth
+ssh-keygen -t rsa -b 2048
+# 复制公钥到目标服务器
+# ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.16.10
+ssh-copy-id root@192.168.16.10
+```
