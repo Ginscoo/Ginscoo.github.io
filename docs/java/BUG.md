@@ -319,7 +319,7 @@ Caused by: javax.net.ssl.SSLHandshakeException: The server selected protocol ver
 
 原因是openJDK不支持TLS1.0
 
-### 0.0.13. 解决方案
+#### 0.0.13. 解决方案
 * 方案一：修改security文件，将`jdk.tls.disabledAlgorithms`改为如下
 ```conf
 # jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, RC4, DES, MD5withRSA, \
@@ -363,10 +363,10 @@ fi
 
 执行 `ps -ef | grep test | wc -l` test用户有25万+进程
 
-### 0.0.16. 问题原因
+#### 0.0.16. 问题原因
 C端排查是C端有个服务异常，导致很多僵尸进程。pkil 掉就可以
 
-### 0.0.17. 其他解答
+#### 0.0.17. 其他解答
 ```log
 最近在使用虚拟机环境做测试时，常常遇到-bash: fork: retry: Resource temporarily unavailable.
 字面意思是资源限制，进程数开的不够大，直接ulimit -u 修改最大进程数之后如故，进而修改/etc/security/limits.conf文件的nproc也一样，无奈只有少开几个服务了.
