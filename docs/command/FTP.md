@@ -17,3 +17,9 @@ close
 bye
 EOF
 ```
+
+## 下载文件
+```sh
+#  wget ftp://test:111111@192.168.16.10:22/home/test.tar.gz
+wget ftp://${username}:${password}@host:${port}${path}
+```
